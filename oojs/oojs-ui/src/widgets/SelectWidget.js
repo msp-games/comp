@@ -29,6 +29,7 @@
  *
  * [1]: https://www.mediawiki.org/wiki/OOjs_UI/Widgets/Selects_and_Options
  *
+ * @abstract
  * @class
  * @extends OO.ui.Widget
  * @mixins OO.ui.GroupElement
@@ -332,11 +333,7 @@ OO.ui.SelectWidget.prototype.unbindKeyDownListener = function () {
  * @return {OO.ui.OptionWidget|null} Outline item widget, `null` if none was found
  */
 OO.ui.SelectWidget.prototype.getTargetItem = function ( e ) {
-	var $item = $( e.target ).closest( '.oo-ui-optionWidget' );
-	if ( $item.length ) {
-		return $item.data( 'oo-ui-optionWidget' );
-	}
-	return null;
+	return $( e.target ).closest( '.oo-ui-optionWidget' ).data( 'oo-ui-optionWidget' ) || null;
 };
 
 /**
@@ -416,6 +413,22 @@ OO.ui.SelectWidget.prototype.highlightItem = function ( item ) {
 	}
 
 	return this;
+};
+
+/**
+ * Programmatically select an option by its data. If the `data` parameter is omitted,
+ * or if the item does not exist, all options will be deselected.
+ *
+ * @param {Object|string} [data] Value of the item to select, omit to deselect all
+ * @fires select
+ * @chainable
+ */
+OO.ui.SelectWidget.prototype.selectItemByData = function ( data ) {
+	var itemFromData = this.getItemFromData( data );
+	if ( data === undefined || !itemFromData ) {
+		return this.selectItem();
+	}
+	return this.selectItem( itemFromData );
 };
 
 /**

@@ -6,6 +6,8 @@
  * which modifies incoming values rather than validating them.
  * Please see the [OOjs UI documentation on MediaWiki] [1] for more information and examples.
  *
+ * This widget can be used inside a HTML form, such as a OO.ui.FormLayout.
+ *
  *     @example
  *     // Example of a text input widget
  *     var textInput = new OO.ui.TextInputWidget( {
@@ -37,9 +39,11 @@
  * @cfg {string} [labelPosition='after'] The position of the inline label relative to that of
  *  the value or placeholder text: `'before'` or `'after'`
  * @cfg {boolean} [required=false] Mark the field as required
- * @cfg {RegExp|string} [validate] Validation pattern, either a regular expression or the
- *  symbolic name of a pattern defined by the class: 'non-empty' (the value cannot be an empty string)
- *  or 'integer' (the value must contain only numbers).
+ * @cfg {RegExp|Function|string} [validate] Validation pattern: when string, a symbolic name of a
+ *  pattern defined by the class: 'non-empty' (the value cannot be an empty string) or 'integer'
+ *  (the value must contain only numbers); when RegExp, a regular expression that must match the
+ *  value for it to be considered valid; when Function, a function receiving the value as parameter
+ *  that must return true, or promise resolving to true, for it to be considered valid.
  */
 OO.ui.TextInputWidget = function OoUiTextInputWidget( config ) {
 	// Configuration initialization
@@ -80,7 +84,7 @@ OO.ui.TextInputWidget = function OoUiTextInputWidget( config ) {
 	// Events
 	this.$input.on( {
 		keypress: this.onKeyPress.bind( this ),
-		blur: this.setValidityFlag.bind( this )
+		blur: this.onBlur.bind( this )
 	} );
 	this.$input.one( {
 		focus: this.onElementAttach.bind( this )
@@ -88,6 +92,7 @@ OO.ui.TextInputWidget = function OoUiTextInputWidget( config ) {
 	this.$icon.on( 'mousedown', this.onIconMouseDown.bind( this ) );
 	this.$indicator.on( 'mousedown', this.onIndicatorMouseDown.bind( this ) );
 	this.on( 'labelChange', this.updatePosition.bind( this ) );
+	this.connect( this, { change: 'onChange' } );
 
 	// Initialization
 	this.$element
@@ -104,7 +109,8 @@ OO.ui.TextInputWidget = function OoUiTextInputWidget( config ) {
 		this.$input.attr( 'autofocus', 'autofocus' );
 	}
 	if ( config.required ) {
-		this.$input.attr( 'required', 'true' );
+		this.$input.attr( 'required', 'required' );
+		this.$input.attr( 'aria-required', 'true' );
 	}
 	if ( this.label || config.autosize ) {
 		this.installParentChangeDetector();
@@ -180,6 +186,16 @@ OO.ui.TextInputWidget.prototype.onKeyPress = function ( e ) {
 };
 
 /**
+ * Handle blur events.
+ *
+ * @private
+ * @param {jQuery.Event} e Blur event
+ */
+OO.ui.TextInputWidget.prototype.onBlur = function () {
+	this.setValidityFlag();
+};
+
+/**
  * Handle element attach events.
  *
  * @private
@@ -193,25 +209,14 @@ OO.ui.TextInputWidget.prototype.onElementAttach = function () {
 };
 
 /**
- * @inheritdoc
+ * Handle change events.
+ *
+ * @param {string} value
+ * @private
  */
-OO.ui.TextInputWidget.prototype.onEdit = function () {
-	this.adjustSize();
-
-	// Parent method
-	return OO.ui.TextInputWidget.super.prototype.onEdit.call( this );
-};
-
-/**
- * @inheritdoc
- */
-OO.ui.TextInputWidget.prototype.setValue = function ( value ) {
-	// Parent method
-	OO.ui.TextInputWidget.super.prototype.setValue.call( this, value );
-
+OO.ui.TextInputWidget.prototype.onChange = function () {
 	this.setValidityFlag();
 	this.adjustSize();
-	return this;
 };
 
 /**
@@ -396,15 +401,15 @@ OO.ui.TextInputWidget.prototype.select = function () {
 /**
  * Set the validation pattern.
  *
- * The validation pattern is either a regular expression or the symbolic name of a pattern
- * defined by the class: 'non-empty' (the value cannot be an empty string) or 'integer' (the
+ * The validation pattern is either a regular expression, a function, or the symbolic name of a
+ * pattern defined by the class: 'non-empty' (the value cannot be an empty string) or 'integer' (the
  * value must contain only numbers).
  *
- * @param {RegExp|string|null} validate Regular expression or the symbolic name of a
- *  pattern (either ‘integer’ or ‘non-empty’) defined by the class.
+ * @param {RegExp|Function|string|null} validate Regular expression, function, or the symbolic name
+ *  of a pattern (either ‘integer’ or ‘non-empty’) defined by the class.
  */
 OO.ui.TextInputWidget.prototype.setValidation = function ( validate ) {
-	if ( validate instanceof RegExp ) {
+	if ( validate instanceof RegExp || validate instanceof Function ) {
 		this.validate = validate;
 	} else {
 		this.validate = this.constructor.static.validationPatterns[ validate ] || /.*/;
@@ -413,12 +418,25 @@ OO.ui.TextInputWidget.prototype.setValidation = function ( validate ) {
 
 /**
  * Sets the 'invalid' flag appropriately.
+ *
+ * @param {boolean} [isValid] Optionally override validation result
  */
-OO.ui.TextInputWidget.prototype.setValidityFlag = function () {
-	var widget = this;
-	this.isValid().done( function ( valid ) {
-		widget.setFlags( { invalid: !valid } );
-	} );
+OO.ui.TextInputWidget.prototype.setValidityFlag = function ( isValid ) {
+	var widget = this,
+		setFlag = function ( valid ) {
+			if ( !valid ) {
+				widget.$input.attr( 'aria-invalid', 'true' );
+			} else {
+				widget.$input.removeAttr( 'aria-invalid' );
+			}
+			widget.setFlags( { invalid: !valid } );
+		};
+
+	if ( isValid !== undefined ) {
+		setFlag( isValid );
+	} else {
+		this.isValid().done( setFlag );
+	}
 };
 
 /**
@@ -427,10 +445,19 @@ OO.ui.TextInputWidget.prototype.setValidityFlag = function () {
  * This method returns a promise that resolves with a boolean `true` if the current value is
  * considered valid according to the supplied {@link #validate validation pattern}.
  *
- * @return {jQuery.Deferred} A promise that resolves to a boolean `true` if the value is valid.
+ * @return {jQuery.Promise} A promise that resolves to a boolean `true` if the value is valid.
  */
 OO.ui.TextInputWidget.prototype.isValid = function () {
-	return $.Deferred().resolve( !!this.getValue().match( this.validate ) ).promise();
+	if ( this.validate instanceof Function ) {
+		var result = this.validate( this.getValue() );
+		if ( $.isFunction( result.promise ) ) {
+			return result.promise();
+		} else {
+			return $.Deferred().resolve( !!result ).promise();
+		}
+	} else {
+		return $.Deferred().resolve( !!this.getValue().match( this.validate ) ).promise();
+	}
 };
 
 /**

@@ -126,22 +126,22 @@
 					),
 					array(
 						'label' => 'Button',
-						'icon' => 'picture',
+						'icon' => 'tag',
 					),
 					array(
 						'label' => 'Button',
-						'icon' => 'picture',
+						'icon' => 'tag',
 						'indicator' => 'down',
 					),
 					array(
-						'icon' => 'picture',
+						'icon' => 'tag',
 						'title' => "Title text",
 					),
 					array(
 						'indicator' => 'down',
 					),
 					array(
-						'icon' => 'picture',
+						'icon' => 'tag',
 						'indicator' => 'down',
 					),
 					array(
@@ -149,7 +149,7 @@
 						'disabled' => true,
 					),
 					array(
-						'icon' => 'picture',
+						'icon' => 'tag',
 						'title' => "Title text",
 						'disabled' => true,
 					),
@@ -287,7 +287,7 @@
 						new OOUI\FieldLayout(
 							new OOUI\ButtonWidget( array(
 								'label' => 'Constructive',
-								'icon' => 'picture',
+								'icon' => 'tag',
 								'flags' => array( 'constructive' ),
 								'disabled' => true
 							) ),
@@ -299,7 +299,7 @@
 						new OOUI\FieldLayout(
 							new OOUI\ButtonWidget( array(
 								'label' => 'Icon',
-								'icon' => 'picture'
+								'icon' => 'tag'
 							) ),
 							array(
 								'label' => "ButtonWidget (icon)\xE2\x80\x8E",
@@ -309,7 +309,7 @@
 						new OOUI\FieldLayout(
 							new OOUI\ButtonWidget( array(
 								'label' => 'Icon',
-								'icon' => 'picture',
+								'icon' => 'tag',
 								'flags' => array( 'progressive' )
 							) ),
 							array(
@@ -352,7 +352,7 @@
 						new OOUI\FieldLayout(
 							new OOUI\ButtonWidget( array(
 								'framed' => false,
-								'icon' => 'picture',
+								'icon' => 'tag',
 								'label' => 'Labeled'
 							) ),
 							array(
@@ -399,7 +399,7 @@
 						new OOUI\FieldLayout(
 							new OOUI\ButtonWidget( array(
 								'framed' => false,
-								'icon' => 'picture',
+								'icon' => 'tag',
 								'label' => 'Disabled',
 								'disabled' => true
 							) ),
@@ -412,7 +412,7 @@
 							new OOUI\ButtonWidget( array(
 								'framed' => false,
 								'flags' => array( 'constructive' ),
-								'icon' => 'picture',
+								'icon' => 'tag',
 								'label' => 'Constructive',
 								'disabled' => true
 							) ),
@@ -431,38 +431,14 @@
 							new OOUI\ButtonGroupWidget( array(
 								'items' => array(
 									new OOUI\ButtonWidget( array(
-										'icon' => 'picture',
-										'indicator' => 'down'
-									) ),
-									new OOUI\ButtonWidget( array(
-										'label' => 'One',
-										'flags' => array( 'progressive' )
-									) ),
-									new OOUI\ButtonWidget( array(
-										'label' => 'Two',
-										'flags' => array( 'constructive' )
-									) ),
-									new OOUI\ButtonWidget( array(
-										'label' => 'Three',
-										'flags' => array( 'destructive' )
-									) )
-								)
-							) ),
-							array(
-								'label' => "ButtonGroupWidget (colors)\xE2\x80\x8E",
-								'align' => 'top'
-							)
-						),
-						new OOUI\FieldLayout(
-							new OOUI\ButtonGroupWidget( array(
-								'items' => array(
-									new OOUI\ButtonWidget( array(
+										'icon' => 'tag',
 										'label' => 'One'
 									) ),
 									new OOUI\ButtonWidget( array(
 										'label' => 'Two'
 									) ),
 									new OOUI\ButtonWidget( array(
+										'indicator' => 'required',
 										'label' => 'Three'
 									) )
 								)
@@ -844,8 +820,8 @@
 	</div>
 
 	<!-- Demonstrate JavaScript "infusion" of PHP widgets -->
-	<script src="../lib/jquery.js"></script>
-	<script src="../lib/oojs.jquery.js"></script>
+	<script src="../node_modules/jquery/dist/jquery.js"></script>
+	<script src="../node_modules/oojs/dist/oojs.jquery.js"></script>
 	<script src="../dist/oojs-ui.js"></script>
 	<script src="../dist/oojs-ui-apex.js"></script>
 	<script src="../dist/oojs-ui-mediawiki.js"></script>

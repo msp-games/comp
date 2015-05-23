@@ -253,9 +253,7 @@ OO.ui.Demo.static.pages.dialogs = function ( demo ) {
 	OutlinedBookletDialog.prototype.initialize = function () {
 		OutlinedBookletDialog.super.prototype.initialize.apply( this, arguments );
 		this.bookletLayout = new OO.ui.BookletLayout( {
-			outlined: true,
-			editable: true,
-			menuSize: '15em'
+			outlined: true
 		} );
 		this.pages = [
 			new SamplePage( 'small', { label: 'Small', icon: 'window' } ),
@@ -265,7 +263,6 @@ OO.ui.Demo.static.pages.dialogs = function ( demo ) {
 			new SamplePage( 'full', { label: 'Full', icon: 'window' } )
 		];
 
-		this.bookletLayout.getOutlineControls().setAbilities( { remove: false } );
 		this.bookletLayout.addPages( this.pages );
 		this.bookletLayout.connect( this, { set: 'onBookletLayoutSet' } );
 		this.$body.append( this.bookletLayout.$element );
@@ -288,6 +285,54 @@ OO.ui.Demo.static.pages.dialogs = function ( demo ) {
 			}, this );
 	};
 
+	function SampleCard( name, config ) {
+		config = $.extend( { label: 'Sample card' }, config );
+		OO.ui.CardLayout.call( this, name, config );
+		this.label = config.label;
+		this.$element.text( this.label );
+	}
+	OO.inheritClass( SampleCard, OO.ui.CardLayout );
+	SampleCard.prototype.setupTabItem = function ( tabItem ) {
+		SampleCard.super.prototype.setupTabItem.call( this, tabItem );
+		this.tabItem.setLabel( this.label );
+	};
+
+	function IndexedDialog( config ) {
+		IndexedDialog.super.call( this, config );
+	}
+	OO.inheritClass( IndexedDialog, OO.ui.ProcessDialog );
+	IndexedDialog.static.title = 'Index dialog';
+	IndexedDialog.static.actions = [
+		{ action: 'save', label: 'Done', flags: [ 'primary', 'progressive' ] },
+		{ action: 'cancel', label: 'Cancel', flags: 'safe' }
+	];
+	IndexedDialog.prototype.getBodyHeight = function () {
+		return 250;
+	};
+	IndexedDialog.prototype.initialize = function () {
+		IndexedDialog.super.prototype.initialize.apply( this, arguments );
+		this.indexLayout = new OO.ui.IndexLayout();
+		this.cards = [
+			new SampleCard( 'first', { label: 'One' } ),
+			new SampleCard( 'second', { label: 'Two' } ),
+			new SampleCard( 'third', { label: 'Three' } ),
+			new SampleCard( 'fourth', { label: 'Four' } )
+		];
+
+		this.indexLayout.addCards( this.cards );
+		this.$body.append( this.indexLayout.$element );
+
+		this.indexLayout.getTabs().getItemFromData( 'fourth' ).setDisabled( true );
+	};
+	IndexedDialog.prototype.getActionProcess = function ( action ) {
+		if ( action ) {
+			return new OO.ui.Process( function () {
+				this.close( { action: action } );
+			}, this );
+		}
+		return IndexedDialog.super.prototype.getActionProcess.call( this, action );
+	};
+
 	function MenuDialog( config ) {
 		MenuDialog.super.call( this, config );
 	}
@@ -302,7 +347,7 @@ OO.ui.Demo.static.pages.dialogs = function ( demo ) {
 	};
 	MenuDialog.prototype.initialize = function () {
 		MenuDialog.super.prototype.initialize.apply( this, arguments );
-		var menuLayout = new OO.ui.MenuLayout( { menuSize: '10em' } ),
+		var menuLayout = new OO.ui.MenuLayout(),
 			positionField = new OO.ui.FieldLayout(
 				new OO.ui.ButtonSelectWidget( {
 					items: [
@@ -436,6 +481,13 @@ OO.ui.Demo.static.pages.dialogs = function ( demo ) {
 		{
 			name: 'Outlined booklet dialog',
 			dialogClass: OutlinedBookletDialog,
+			config: {
+				size: 'medium'
+			}
+		},
+		{
+			name: 'Indexed dialog',
+			dialogClass: IndexedDialog,
 			config: {
 				size: 'medium'
 			}

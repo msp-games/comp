@@ -6,14 +6,22 @@
 @active: #999;
 @background: #ffffff;
 
+@select: #d8e6fe;
+
 @progressive: #347bff;
-@progressive-selected: #2962cc;
+@progressive-hover: #2962CC;
+@progressive-selected: #1F4999;
+@progressive-fade: rgba(52,123,255,0.1);
 
 @constructive: #00af89;
-@constructive-selected: #008c6d;
+@constructive-hover: #008064;
+@constructive-selected: #005946;
+@constructive-fade: rgba(0,171,137,0.1);
 
 @destructive: #d11d13;
-@destructive-selected: #a7170f;
+@destructive-hover: #8C130D;
+@destructive-selected: #73100A;
+@destructive-fade: rgba(209,29,19,0.1);
 
 @text: #555555;
 @pressed-text: #444444;
@@ -36,6 +44,11 @@
 
 @icon-size: unit(24 / 16 / 0.8, em);
 @indicator-size: unit(12 / 16 / 0.8, em);
+
+// Theme animation variables
+@quick-ease: 0.1s ease-in-out;
+@medium-ease-out-back: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+@medium-ease-out-sine: 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
 
 // Theme mixins
 

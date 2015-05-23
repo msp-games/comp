@@ -24,7 +24,7 @@ OO.ui.Demo.static.pages.toolbars = function ( demo ) {
 		toolbars[ i ].getToolAccelerator = getToolAccelerator;
 	}
 
-	function createTool( toolbar, group, name, icon, title, init, onSelect ) {
+	function createTool( toolbar, group, name, icon, title, init, onSelect, displayBothIconAndLabel ) {
 		var Tool = function () {
 			Tool.super.apply( this, arguments );
 			this.toggled = false;
@@ -50,6 +50,7 @@ OO.ui.Demo.static.pages.toolbars = function ( demo ) {
 		Tool.static.group = group;
 		Tool.static.icon = icon;
 		Tool.static.title = title;
+		Tool.static.displayBothIconAndLabel = !!displayBothIconAndLabel;
 		return Tool;
 	}
 
@@ -186,7 +187,7 @@ OO.ui.Demo.static.pages.toolbars = function ( demo ) {
 	toolbars[ 3 ].setup( [
 		{
 			type: 'bar',
-			include: [ { group: 'veHistory' } ]
+			include: [ { group: 'history' } ]
 		},
 		{
 			type: 'menu',
@@ -196,17 +197,17 @@ OO.ui.Demo.static.pages.toolbars = function ( demo ) {
 		{
 			type: 'list',
 			indicator: 'down',
-			icon: 'translation',
+			icon: 'comment',
 			include: [ { group: 'listTools' } ],
 			allowCollapse: [ 'listTool1', 'listTool6' ]
 		},
 		{
 			type: 'bar',
-			include: [ { group: 'veLink' } ]
+			include: [ { group: 'link' } ]
 		},
 		{
 			type: 'bar',
-			include: [ { group: 'veCite' }, 'toolGroupTool' ]
+			include: [ { group: 'cite' } ]
 		},
 		{
 			type: 'list',
@@ -216,22 +217,14 @@ OO.ui.Demo.static.pages.toolbars = function ( demo ) {
 		}
 	] );
 
-	saveButton = new OO.ui.ButtonWidget( { label: 'Save page', flags: [ 'progressive', 'primary' ] } );
+	saveButton = new OO.ui.ButtonWidget( { label: 'Save', flags: [ 'progressive', 'primary' ] } );
 	actionButton = new OO.ui.ButtonWidget( { label: 'Action' } );
 	actionButtonDisabled = new OO.ui.ButtonWidget( { label: 'Disabled', disabled: true } );
 	toolbars[ 1 ].$actions
-		.addClass( 'oo-ui-demo-toolbar-actionButtons' )
 		.append( actionButton.$element, actionButtonDisabled.$element );
 
 	toolbars[ 3 ].$actions
-		.append(
-			$( '<div>' )
-				.addClass( 'oo-ui-demo-toolbar-utilities' )
-				.append( toolbars[ 2 ].$element ),
-			$( '<div>' )
-				.addClass( 'oo-ui-demo-toolbar-actionButtons' )
-				.append( saveButton.$element )
-		);
+		.append( toolbars[ 2 ].$element, saveButton.$element );
 
 	for ( i = 0; i < toolbars.length; i++ ) {
 		toolbars[ i ].emit( 'updateState' );
@@ -255,9 +248,9 @@ OO.ui.Demo.static.pages.toolbars = function ( demo ) {
 		],
 
 		moreListTools: [
-			[ 'listTool2', 'book', 'Another basic tool' ],
-			[ 'listTool4', 'journal', 'More basic tools' ],
-			[ 'listTool5', 'newspaper', 'And even more' ]
+			[ 'listTool2', 'code', 'Another basic tool' ],
+			[ 'listTool4', 'picture', 'More basic tools' ],
+			[ 'listTool5', 'ellipsis', 'And even more' ]
 		],
 
 		popupTools: [
@@ -286,17 +279,17 @@ OO.ui.Demo.static.pages.toolbars = function ( demo ) {
 			[ 'unusedTool1', 'help', 'And neither is this one' ]
 		],
 
-		veHistory: [
+		history: [
 			[ 'undoTool', 'undo', 'Undo' ],
 			[ 'redoTool', 'redo', 'Redo' ]
 		],
 
-		veLink: [
+		link: [
 			[ 'linkTool', 'link', 'Link' ]
 		],
 
-		veCite: [
-			[ 'citeTool', 'citeArticle', 'Cite' ]
+		cite: [
+			[ 'citeTool', 'citeArticle', 'Cite', null, null, true ]
 		]
 	};
 
@@ -310,9 +303,9 @@ OO.ui.Demo.static.pages.toolbars = function ( demo ) {
 	createToolGroup( 1, 'menuTools' );
 	createToolGroup( 1, 'disabledMenuTools' );
 	createToolGroup( 2, 'listTools' );
-	createToolGroup( 3, 'veHistory' );
-	createToolGroup( 3, 'veLink' );
-	createToolGroup( 3, 'veCite' );
+	createToolGroup( 3, 'history' );
+	createToolGroup( 3, 'link' );
+	createToolGroup( 3, 'cite' );
 	createToolGroup( 3, 'menuTools' );
 	createToolGroup( 3, 'listTools' );
 	createToolGroup( 3, 'moreListTools' );
@@ -337,7 +330,7 @@ OO.ui.Demo.static.pages.toolbars = function ( demo ) {
 	$demo.append(
 		$containers.eq( 0 ).append( '<div class="oo-ui-demo-toolbars-contents">Toolbar</div>' ),
 		$containers.eq( 1 ).append( '<div class="oo-ui-demo-toolbars-contents">Toolbar with action buttons</div>' ),
-		$containers.eq( 3 ).append( '<div class="oo-ui-demo-toolbars-contents">VisualEditor-like toolbar</div>' )
+		$containers.eq( 3 ).append( '<div class="oo-ui-demo-toolbars-contents">Word processor toolbar</div>' )
 	);
 	for ( i = 0; i < toolbars.length; i++ ) {
 		toolbars[ i ].initialize();

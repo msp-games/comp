@@ -140,22 +140,22 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 		},
 		{
 			label: 'Button',
-			icon: 'picture'
+			icon: 'tag'
 		},
 		{
 			label: 'Button',
-			icon: 'picture',
+			icon: 'tag',
 			indicator: 'down'
 		},
 		{
-			icon: 'picture',
+			icon: 'tag',
 			title: 'Title text'
 		},
 		{
 			indicator: 'down'
 		},
 		{
-			icon: 'picture',
+			icon: 'tag',
 			indicator: 'down'
 		},
 		{
@@ -163,7 +163,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 			disabled: true
 		},
 		{
-			icon: 'picture',
+			icon: 'tag',
 			title: 'Title text',
 			disabled: true
 		},
@@ -188,8 +188,8 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 	horizontalAlignmentWidget.$element.append(
 		new OO.ui.ButtonWidget( { label: 'Button' } ).$element,
 		new OO.ui.ButtonGroupWidget( { items: [
-			new OO.ui.ButtonWidget( { label: 'A' } ),
-			new OO.ui.ButtonWidget( { label: 'B' } )
+			new OO.ui.ToggleButtonWidget( { label: 'A' } ),
+			new OO.ui.ToggleButtonWidget( { label: 'B' } )
 		] } ).$element,
 		new OO.ui.ButtonInputWidget( { label: 'ButtonInput' } ).$element,
 		new OO.ui.TextInputWidget( { value: 'TextInput' } ).$element,
@@ -299,7 +299,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				new OO.ui.FieldLayout(
 					new OO.ui.ButtonWidget( {
 						label: 'Constructive',
-						icon: 'picture',
+						icon: 'tag',
 						flags: [ 'constructive' ],
 						disabled: true
 					} ),
@@ -311,7 +311,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				new OO.ui.FieldLayout(
 					new OO.ui.ButtonWidget( {
 						label: 'Icon',
-						icon: 'picture'
+						icon: 'tag'
 					} ),
 					{
 						label: 'ButtonWidget (icon)\u200E',
@@ -321,7 +321,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				new OO.ui.FieldLayout(
 					new OO.ui.ButtonWidget( {
 						label: 'Icon',
-						icon: 'picture',
+						icon: 'tag',
 						flags: [ 'progressive' ]
 					} ),
 					{
@@ -395,7 +395,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				new OO.ui.FieldLayout(
 					new OO.ui.ButtonWidget( {
 						framed: false,
-						icon: 'picture',
+						icon: 'tag',
 						label: 'Labeled'
 					} ),
 					{
@@ -454,7 +454,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				new OO.ui.FieldLayout(
 					new OO.ui.ButtonWidget( {
 						framed: false,
-						icon: 'picture',
+						icon: 'tag',
 						label: 'Disabled',
 						disabled: true
 					} ),
@@ -467,7 +467,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 					new OO.ui.ButtonWidget( {
 						framed: false,
 						flags: [ 'constructive' ],
-						icon: 'picture',
+						icon: 'tag',
 						label: 'Constructive',
 						disabled: true
 					} ),
@@ -479,7 +479,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				new OO.ui.FieldLayout(
 					new OO.ui.ButtonWidget( {
 						framed: false,
-						icon: 'picture',
+						icon: 'tag',
 						indicator: 'down',
 						label: 'Labeled'
 					} ),
@@ -497,38 +497,14 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 					new OO.ui.ButtonGroupWidget( {
 						items: [
 							new OO.ui.ButtonWidget( {
-								icon: 'picture',
-								indicator: 'down'
-							} ),
-							new OO.ui.ButtonWidget( {
-								label: 'One',
-								flags: [ 'progressive' ]
-							} ),
-							new OO.ui.ButtonWidget( {
-								label: 'Two',
-								flags: [ 'constructive' ]
-							} ),
-							new OO.ui.ButtonWidget( {
-								label: 'Three',
-								flags: [ 'destructive' ]
-							} )
-						]
-					} ),
-					{
-						label: 'ButtonGroupWidget (colors)\u200E',
-						align: 'top'
-					}
-				),
-				new OO.ui.FieldLayout(
-					new OO.ui.ButtonGroupWidget( {
-						items: [
-							new OO.ui.ButtonWidget( {
+								icon: 'tag',
 								label: 'One'
 							} ),
 							new OO.ui.ButtonWidget( {
 								label: 'Two'
 							} ),
 							new OO.ui.ButtonWidget( {
+								indicator: 'required',
 								label: 'Three'
 							} )
 						]
@@ -542,37 +518,8 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 					new OO.ui.ButtonSelectWidget( {
 						items: [
 							new OO.ui.ButtonOptionWidget( {
-								data: 'a',
-								icon: 'picture',
-								indicator: 'down'
-							} ),
-							new OO.ui.ButtonOptionWidget( {
 								data: 'b',
-								label: 'One',
-								flags: [ 'progressive' ]
-							} ),
-							new OO.ui.ButtonOptionWidget( {
-								data: 'c',
-								label: 'Two',
-								flags: [ 'constructive' ]
-							} ),
-							new OO.ui.ButtonOptionWidget( {
-								data: 'd',
-								label: 'Three',
-								flags: [ 'destructive' ]
-							} )
-						]
-					} ),
-					{
-						label: 'ButtonSelectWidget (colors)\u200E',
-						align: 'top'
-					}
-				),
-				new OO.ui.FieldLayout(
-					new OO.ui.ButtonSelectWidget( {
-						items: [
-							new OO.ui.ButtonOptionWidget( {
-								data: 'b',
+								icon: 'tag',
 								label: 'One'
 							} ),
 							new OO.ui.ButtonOptionWidget( {
@@ -581,6 +528,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 							} ),
 							new OO.ui.ButtonOptionWidget( {
 								data: 'd',
+								indicator: 'required',
 								label: 'Three'
 							} )
 						]
@@ -595,19 +543,17 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 						disabled: true,
 						items: [
 							new OO.ui.ButtonOptionWidget( {
-								data: 'a',
-								icon: 'picture', indicator: 'down'
-							} ),
-							new OO.ui.ButtonOptionWidget( {
-								data: 1,
+								data: 'b',
+								icon: 'tag',
 								label: 'One'
 							} ),
 							new OO.ui.ButtonOptionWidget( {
-								data: 2,
+								data: 'c',
 								label: 'Two'
 							} ),
 							new OO.ui.ButtonOptionWidget( {
-								data: 3,
+								data: 'd',
+								indicator: 'required',
 								label: 'Three'
 							} )
 						]
@@ -621,22 +567,19 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 					new OO.ui.ButtonSelectWidget( {
 						items: [
 							new OO.ui.ButtonOptionWidget( {
-								data: 'a',
-								icon: 'picture', indicator: 'down'
-							} ),
-							new OO.ui.ButtonOptionWidget( {
-								data: 1,
+								data: 'b',
+								icon: 'tag',
 								label: 'One',
 								disabled: true
 							} ),
 							new OO.ui.ButtonOptionWidget( {
-								data: 2,
+								data: 'c',
 								label: 'Two'
 							} ),
 							new OO.ui.ButtonOptionWidget( {
-								data: 3,
-								label: 'Three',
-								disabled: true
+								data: 'd',
+								indicator: 'required',
+								label: 'Three'
 							} )
 						]
 					} ),
@@ -791,10 +734,22 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				new OO.ui.FieldLayout(
 					new OO.ui.TextInputWidget( {
 						indicator: 'required',
-						required: true
+						required: true,
+						validate: 'non-empty'
 					} ),
 					{
 						label: 'TextInputWidget (indicator, required)\u200E',
+						align: 'top'
+					}
+				),
+				new OO.ui.FieldLayout(
+					new OO.ui.TextInputWidget( {
+						validate: function ( value ) {
+							return value.length % 2 === 0;
+						}
+					} ),
+					{
+						label: 'TextInputWidget (only allows even number of characters)\u200E',
 						align: 'top'
 					}
 				),
@@ -838,7 +793,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				),
 				new OO.ui.FieldLayout(
 					new OO.ui.TextInputWidget( {
-						icon: 'picture',
+						icon: 'tag',
 						indicator: 'alert',
 						value: 'Text input with label',
 						label: 'Inline label'
@@ -851,7 +806,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				new OO.ui.FieldLayout(
 					new OO.ui.TextInputWidget( {
 						value: 'Disabled',
-						icon: 'picture',
+						icon: 'tag',
 						indicator: 'required',
 						label: 'Inline label',
 						disabled: true
@@ -898,7 +853,7 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 				new OO.ui.FieldLayout(
 					new OO.ui.DropdownWidget( {
 						label: 'Select one',
-						icon: 'picture',
+						icon: 'tag',
 						menu: {
 							items: [
 								new OO.ui.MenuOptionWidget( {
@@ -1214,11 +1169,62 @@ OO.ui.Demo.static.pages.widgets = function ( demo ) {
 							label: 'More information',
 							$content: $( '<p>Extra information here.</p>' ),
 							padded: true,
-							align: 'left'
+							align: 'force-left'
 						}
 					} ),
 					{
-						label: 'PopupButtonWidget (frameless, with popup head)\u200E',
+						label: 'PopupButtonWidget (frameless, with popup head, align: force-left)\u200E',
+						align: 'top'
+					}
+				),
+				new OO.ui.FieldLayout(
+					new OO.ui.PopupButtonWidget( {
+						icon: 'info',
+						framed: false,
+						popup: {
+							head: true,
+							label: 'More information',
+							$content: $( '<p>Extra information here.</p>' ),
+							padded: true,
+							align: 'force-right'
+						}
+					} ),
+					{
+						label: 'PopupButtonWidget (frameless, with popup head align: force-right)\u200E',
+						align: 'top'
+					}
+				),
+				new OO.ui.FieldLayout(
+					new OO.ui.PopupButtonWidget( {
+						icon: 'info',
+						framed: false,
+						popup: {
+							head: true,
+							label: 'More information',
+							$content: $( '<p>Extra information here.</p>' ),
+							padded: true,
+							align: 'backwards'
+						}
+					} ),
+					{
+						label: 'PopupButtonWidget (frameless, with popup head align: backwards)\u200E',
+						align: 'top'
+					}
+				),
+				new OO.ui.FieldLayout(
+					new OO.ui.PopupButtonWidget( {
+						icon: 'info',
+						framed: false,
+						popup: {
+							head: true,
+							label: 'More information',
+							$content: $( '<p>Extra information here.</p>' ),
+							padded: true,
+							align: 'forwards'
+						}
+					} ),
+					{
+						label: 'PopupButtonWidget (frameless, with popup head align: forwards)\u200E',
 						align: 'top'
 					}
 				),

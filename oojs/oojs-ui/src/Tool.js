@@ -6,6 +6,7 @@
  * @extends OO.ui.Widget
  * @mixins OO.ui.IconElement
  * @mixins OO.ui.FlaggedElement
+ * @mixins OO.ui.TabIndexedElement
  *
  * @constructor
  * @param {OO.ui.ToolGroup} toolGroup
@@ -25,10 +26,6 @@ OO.ui.Tool = function OoUiTool( toolGroup, config ) {
 	// Parent constructor
 	OO.ui.Tool.super.call( this, config );
 
-	// Mixin constructors
-	OO.ui.IconElement.call( this, config );
-	OO.ui.FlaggedElement.call( this, config );
-
 	// Properties
 	this.toolGroup = toolGroup;
 	this.toolbar = this.toolGroup.getToolbar();
@@ -37,6 +34,11 @@ OO.ui.Tool = function OoUiTool( toolGroup, config ) {
 	this.$accel = $( '<span>' );
 	this.$link = $( '<a>' );
 	this.title = null;
+
+	// Mixin constructors
+	OO.ui.IconElement.call( this, config );
+	OO.ui.FlaggedElement.call( this, config );
+	OO.ui.TabIndexedElement.call( this, $.extend( {}, config, { $tabIndexed: this.$link } ) );
 
 	// Events
 	this.toolbar.connect( this, { updateState: 'onUpdateState' } );
@@ -54,7 +56,6 @@ OO.ui.Tool = function OoUiTool( toolGroup, config ) {
 	this.$link
 		.addClass( 'oo-ui-tool-link' )
 		.append( this.$icon, this.$title, this.$accel )
-		.prop( 'tabIndex', 0 )
 		.attr( 'role', 'button' );
 	this.$element
 		.data( 'oo-ui-tool', this )
@@ -62,6 +63,7 @@ OO.ui.Tool = function OoUiTool( toolGroup, config ) {
 			'oo-ui-tool ' + 'oo-ui-tool-name-' +
 			this.constructor.static.name.replace( /^([^\/]+)\/([^\/]+).*$/, '$1-$2' )
 		)
+		.toggleClass( 'oo-ui-tool-with-label', this.constructor.static.displayBothIconAndLabel )
 		.append( this.$link );
 	this.setTitle( config.title || this.constructor.static.title );
 };
@@ -71,6 +73,7 @@ OO.ui.Tool = function OoUiTool( toolGroup, config ) {
 OO.inheritClass( OO.ui.Tool, OO.ui.Widget );
 OO.mixinClass( OO.ui.Tool, OO.ui.IconElement );
 OO.mixinClass( OO.ui.Tool, OO.ui.FlaggedElement );
+OO.mixinClass( OO.ui.Tool, OO.ui.TabIndexedElement );
 
 /* Events */
 
@@ -120,6 +123,16 @@ OO.ui.Tool.static.group = '';
  * @property {string|Function} Title text or a function that returns text
  */
 OO.ui.Tool.static.title = '';
+
+/**
+ * Whether this tool should be displayed with both title and label when used in a bar tool group.
+ * Normally only the icon is displayed, or only the label if no icon is given.
+ *
+ * @static
+ * @inheritable
+ * @property {boolean}
+ */
+OO.ui.Tool.static.displayBothIconAndLabel = false;
 
 /**
  * Tool can be automatically added to catch-all groups.

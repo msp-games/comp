@@ -1,5 +1,98 @@
 # OOjs UI Release History
 
+## v0.11.3 / 2015-05-12
+* BarToolGroup: Don't use "pointer" cursor for disabled tools in enabled toolgroups (Bartosz Dziewoński)
+* Tool: Support icon+label in bar tool groups (Bartosz Dziewoński)
+* ToolGroupTool: Correct opacity of disabled nested tool group handle (Bartosz Dziewoński)
+* ToolGroupTool: Synchronize inner ToolGroup disabledness state (Bartosz Dziewoński)
+* MediaWiki theme: Add a powerful default text color for tools (Trevor Parscal)
+* MediaWiki theme: Adjust quotes icon to match other icons (nirzar)
+* MediaWiki theme: Give names to some more toolbar colours (Bartosz Dziewoński)
+* MediaWiki theme: Provide all variants of the 'tag' icon (James D. Forrester)
+* MediaWiki theme: Rejigger some toolbar coloring (Bartosz Dziewoński)
+* MediaWiki theme: Remove box-shadow from nested toolbars (Bartosz Dziewoński)
+* MediaWiki theme: Remove unusued toolbar shadow (Trevor Parscal)
+* MediaWiki theme: Update button specification (nirzar)
+
+## v0.11.2 / 2015-05-11
+* Don't select lookup items on initialize (Ed Sanders)
+* ListToolGroup, MenuToolGroup: Set accelTooltips = false (Bartosz Dziewoński)
+* PopupWidget: Add setAlignment (Moriel Schottlender)
+* SelectWidget: Mark as @abstract, which it is (Bartosz Dziewoński)
+* Simplify default action prevention in buttons and forms (Bartosz Dziewoński)
+* TabOptionWidget: Fix disabled styles to not react to hover/select (Ed Sanders)
+* TextInputWidget: Allow override of #setValidityFlag (Ed Sanders)
+* TextInputWidget: Use aria-required along with the required attribute (Prateek Saxena)
+* Toolbar: Fix shadow styling (Bartosz Dziewoński)
+* Toolbar: Move some tweaks from demo to actual implementation (Bartosz Dziewoński)
+* Toolbar: Remove some useless code from the example (Bartosz Dziewoński)
+* Toolbar: Rework example and add 'menu' tool group example (Bartosz Dziewoński)
+* MediaWiki theme: Change highlight color for selected menu option (nirzar)
+* MediaWiki theme: Polish the toolbar design (nirzar)
+* MediaWiki theme: Remove accidentally duplicated styles for SelectWidget (Bartosz Dziewoński)
+
+## v0.11.1 / 2015-05-04
+* Add IndexLayout (Trevor Parscal)
+* CardLayout: Fix typo (Kirsten Menger-Anderson)
+* LabelElement: Document that label config option can take an HtmlSnippet (Roan Kattouw)
+* PopupButtonWidget: Update align config in example (Kirsten Menger-Anderson)
+* Remove GridLayout remnants (Bartosz Dziewoński)
+* SelectWidget: Add #selectItemByData method (Moriel Schottlender)
+* TabOptionWidget: Change link to card layout (Kirsten Menger-Anderson)
+* TextInputWidget: Annotate input validation with aria-invalid (Prateek Saxena)
+* TextInputWidget: Don't set 'invalid' flag on first focus, even if invalid (Bartosz Dziewoński)
+* TextInputWidget: Support 'required' config option in PHP (Bartosz Dziewoński)
+* MediaWiki theme: Add 'destructive' variant to block icon (Moriel Schottlender)
+* MediaWiki theme: Better vertical alignment of 'search' icon (Ed Sanders)
+* MediaWiki theme: Tweak 'search' icon size (Ed Sanders)
+* MediaWiki theme: Use variable for transition time and easing function (Prateek Saxena)
+* MediaWiki theme: input: Use variable for transition time and easing function (Prateek Saxena)
+* MediaWiki theme: radio/checkbox: Use variable for transition time and easing function (Prateek Saxena)
+* MediaWiki, Apex themes: Switch icons: clear → cancel, closeInput → clear (Bartosz Dziewoński)
+* MediaWiki, Apex themes: Switch over 'magnifyingGlass' icon to be 'search' (James D. Forrester)
+* build: Add clean:doc task (Bartosz Dziewoński)
+* build: Bump grunt-jscs to latest version (James D. Forrester)
+* core: Add OO.ui.debounce() utility (Roan Kattouw)
+* demo: Add icons with variants to icons demo (Bartosz Dziewoński)
+
+## v0.11.0 / 2015-04-29
+* [BREAKING CHANGE] Do not set font-size: 0.8em anywhere in the library (Bartosz Dziewoński)
+
+* [DEPRECATING CHANGE] Create rtl-ready alignments in PopupWidget (Moriel Schottlender)
+
+* MediaWiki theme: Adding variants to several icons (Moriel Schottlender)
+* TextInputWidget: Allow functions to be passed as 'validate' config option (Bartosz Dziewoński)
+* TextInputWidget: Styles for 'invalid' flag (Bartosz Dziewoński)
+* Update OOjs to v1.1.7 (James D. Forrester)
+* Update jQuery from v1.11.1 to v1.11.3 (James D. Forrester)
+* build: Use jquery and oojs from npm instead of embedded lib (Timo Tijhof)
+
+## v0.10.1 / 2015-04-27
+* Correct 'tabindex' attribute setting (Bartosz Dziewoński)
+* Make toolbars keyboard-accessible (Bartosz Dziewoński)
+* ToggleButtonWidget: Unbreak horizontal alignment (Bartosz Dziewoński)
+
+## v0.10.0 / 2015-04-22
+* [BREAKING CHANGE] ButtonWidget: remove deprecated nofollow option alias (C. Scott Ananian)
+* [BREAKING CHANGE] Convert ToggleWidget from a mixin to an abstract class (Bartosz Dziewoński)
+* [BREAKING CHANGE] MenuLayout: Reimplement without inline styles (Bartosz Dziewoński)
+
+* BarToolGroup: Allow tools with labels instead of icons (Bartosz Dziewoński)
+* BookletLayout: Find first focusable element and add focusable utility (Moriel Schottlender)
+* ButtonInputWidget: Don't double-mixin FlaggedElement (Bartosz Dziewoński)
+* ButtonWidget: Remove href to make unclickable when disabled (Bartosz Dziewoński)
+* ButtonWidget: Remove pointless #isHyperlink property (Bartosz Dziewoński)
+* FormLayout: Better document how this works with InputWidgets (Bartosz Dziewoński)
+* MenuLayout: Add example (Kirsten Menger-Anderson)
+* MenuLayout: Fix initialization order (Bartosz Dziewoński)
+* PHP: More useful debugging information on unsafe tag attributes (Chad Horohoe)
+* SelectWidget#getTargetItem: Simplify (Ed Sanders)
+* Toolbar: Add example (Bartosz Dziewoński)
+* themes: Add viewCompact, viewDetails, visionSimulator icons for iconography page (Mun May Tee)
+* demo: Remove VisualEditor references from toolbar demo, use generic icons (Ed Sanders)
+* demo: Remove outline controls from outlined BookletLayout demo (Bartosz Dziewoński)
+* demo: Simplify ButtonGroupWidget and ButtonSelectWidget examples (Bartosz Dziewoński)
+
 ## v0.9.8 / 2015-04-12
 * Apex, MediaWiki: Correct or delete unused SVG files (James D. Forrester)
 * Apex theme: Correctly position popups in RTL; follows-up v0.9.5 (Moriel Schottlender)
@@ -11,13 +104,15 @@
 * build: Add explicit dependency upon grunt-cli (Kunal Mehta)
 * build: Run lint before build in grunt-test (Timo Tijhof)
 * colorize-svg: Generate language-specific rules for images even if equal to default ones (Bartosz Dziewoński)
-* colorize-svg: Sprinkle /* @noflip */ on language-specific rules (Bartosz Dziewoński)
+* colorize-svg: Sprinkle `/* @noflip */` on language-specific rules (Bartosz Dziewoński)
 * demo: Change html dir property when direction changes (Moriel Schottlender)
 
 ## v0.9.7 / 2015-04-03
 * build: Generate correct paths to fallback images (Bartosz Dziewoński)
 
 ## v0.9.5 / 2015-04-02
+* [DEPRECATING CHANGE] Deprecate search widget event re-emission (Ed Sanders)
+
 * ActionFieldLayout: Add description and example (Kirsten Menger-Anderson)
 * Add vertical spacing to RadioSelectWidget in MW theme (Ed Sanders)
 * Allow rejecting Process with single Error (Matthew Flaschen)
@@ -27,7 +122,6 @@
 * Bring in remaining VisualEditor icons for Apex and MediaWiki themes (James D. Forrester)
 * Choose can't emit with a null item (Ed Sanders)
 * Correctly position popups in RTL (Moriel Schottlender)
-* Deprecate search widget event re-emission (Ed Sanders)
 * Fix opacity of icons/indicators in disabled DecoratedOptionWidget (Ed Sanders)
 * IconWidget: Mix in FlaggedElement (Bartosz Dziewoński)
 * Increase specificity of ButtonElement icon and indicator styles (Bartosz Dziewoński)

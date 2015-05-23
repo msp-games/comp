@@ -205,6 +205,35 @@ OO.ui.BookletLayout.prototype.focus = function ( itemIndex ) {
 };
 
 /**
+ * Find the first focusable input in the booklet layout and focus
+ * on it.
+ */
+OO.ui.BookletLayout.prototype.focusFirstFocusable = function () {
+	var i, len,
+		found = false,
+		items = this.stackLayout.getItems(),
+		checkAndFocus = function () {
+			if ( OO.ui.isFocusableElement( $( this ) ) ) {
+				$( this ).focus();
+				found = true;
+				return false;
+			}
+		};
+
+	for ( i = 0, len = items.length; i < len; i++ ) {
+		if ( found ) {
+			break;
+		}
+		// Find all potentially focusable elements in the item
+		// and check if they are focusable
+		items[i].$element
+			.find( 'input, select, textarea, button, object' )
+			/* jshint loopfunc:true */
+			.each( checkAndFocus );
+	}
+};
+
+/**
  * Handle outline widget select events.
  *
  * @private
@@ -475,7 +504,7 @@ OO.ui.BookletLayout.prototype.setPage = function ( name ) {
 		if ( this.outlined ) {
 			selectedItem = this.outlineSelectWidget.getSelectedItem();
 			if ( selectedItem && selectedItem.getData() !== name ) {
-				this.outlineSelectWidget.selectItem( this.outlineSelectWidget.getItemFromData( name ) );
+				this.outlineSelectWidget.selectItemByData( name );
 			}
 		}
 		if ( page ) {

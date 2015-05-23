@@ -31,6 +31,39 @@ OO.ui.Keys = {
 };
 
 /**
+ * Check if an element is focusable.
+ * Inspired from :focusable in jQueryUI v1.11.4 - 2015-04-14
+ *
+ * @param {jQuery} element Element to test
+ * @return {Boolean} [description]
+ */
+OO.ui.isFocusableElement = function ( $element ) {
+	var node = $element[0],
+		nodeName = node.nodeName.toLowerCase(),
+		// Check if the element have tabindex set
+		isInElementGroup = /^(input|select|textarea|button|object)$/.test( nodeName ),
+		// Check if the element is a link with href or if it has tabindex
+		isOtherElement = (
+			( nodeName === 'a' && node.href ) ||
+			!isNaN( $element.attr( 'tabindex' ) )
+		),
+		// Check if the element is visible
+		isVisible = (
+			// This is quicker than calling $element.is( ':visible' )
+			$.expr.filters.visible( node ) &&
+			// Check that all parents are visible
+			!$element.parents().addBack().filter( function () {
+				return $.css( this, 'visibility' ) === 'hidden';
+			} ).length
+		);
+
+	return (
+		( isInElementGroup ? !node.disabled : isOtherElement ) &&
+		isVisible
+	);
+};
+
+/**
  * Get the user's language and any fallback languages.
  *
  * These language codes are used to localize user interface elements in the user's language.
@@ -101,6 +134,38 @@ OO.ui.contains = function ( containers, contained, matchContainers ) {
 		}
 	}
 	return false;
+};
+
+/**
+ * Return a function, that, as long as it continues to be invoked, will not
+ * be triggered. The function will be called after it stops being called for
+ * N milliseconds. If `immediate` is passed, trigger the function on the
+ * leading edge, instead of the trailing.
+ *
+ * Ported from: http://underscorejs.org/underscore.js
+ *
+ * @param {Function} func
+ * @param {number} wait
+ * @param {boolean} immediate
+ * @return {Function}
+ */
+OO.ui.debounce = function ( func, wait, immediate ) {
+	var timeout;
+	return function () {
+		var context = this,
+			args = arguments,
+			later = function () {
+				timeout = null;
+				if ( !immediate ) {
+					func.apply( context, args );
+				}
+			};
+		if ( immediate && !timeout ) {
+			func.apply( context, args );
+		}
+		clearTimeout( timeout );
+		timeout = setTimeout( later, wait );
+	};
 };
 
 /**

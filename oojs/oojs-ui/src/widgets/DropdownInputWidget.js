@@ -1,7 +1,7 @@
 /**
  * DropdownInputWidget is a {@link OO.ui.DropdownWidget DropdownWidget} intended to be used
- * within a {@link OO.ui.FormLayout form}. The selected value is synchronized with the value
- * of  a hidden HTML `input` tag. Please see the [OOjs UI documentation on MediaWiki][1] for
+ * within a HTML form, such as a OO.ui.FormLayout. The selected value is synchronized with the value
+ * of a hidden HTML `input` tag. Please see the [OOjs UI documentation on MediaWiki][1] for
  * more information about input widgets.
  *
  *     @example
@@ -73,10 +73,7 @@ OO.ui.DropdownInputWidget.prototype.onMenuSelect = function ( item ) {
  * @inheritdoc
  */
 OO.ui.DropdownInputWidget.prototype.setValue = function ( value ) {
-	var item = this.dropdownWidget.getMenu().getItemFromData( value );
-	if ( item ) {
-		this.dropdownWidget.getMenu().selectItem( item );
-	}
+	this.dropdownWidget.getMenu().selectItemByData( value );
 	OO.ui.DropdownInputWidget.super.prototype.setValue.call( this, value );
 	return this;
 };

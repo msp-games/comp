@@ -32,10 +32,15 @@ class TextInputWidget extends InputWidget {
 	 * @param boolean $config['readOnly'] Prevent changes (default: false)
 	 * @param number $config['maxLength'] Maximum allowed number of characters to input
 	 * @param boolean $config['multiline'] Allow multiple lines of text (default: false)
+	 * @param boolean $config['required'] Mark the field as required (default: false)
 	 */
 	public function __construct( array $config = array() ) {
 		// Config initialization
-		$config = array_merge( array( 'readOnly' => false, 'autofocus' => false ), $config );
+		$config = array_merge( array(
+			'readOnly' => false,
+			'autofocus' => false,
+			'required' => false,
+		), $config );
 
 		// Parent constructor
 		parent::__construct( $config );
@@ -60,6 +65,9 @@ class TextInputWidget extends InputWidget {
 		}
 		if ( $config['autofocus'] ) {
 			$this->input->setAttributes( array( 'autofocus' => 'autofocus' ) );
+		}
+		if ( $config['required'] ) {
+			$this->input->setAttributes( array( 'required' => 'required', 'aria-required' => 'true' ) );
 		}
 	}
 
@@ -132,6 +140,11 @@ class TextInputWidget extends InputWidget {
 		$autofocus = $this->input->getAttribute( 'autofocus' );
 		if ( $autofocus !== null ) {
 			$config['autofocus'] = true;
+		}
+		$required = $this->input->getAttribute( 'required' );
+		$ariarequired = $this->input->getAttribute( 'aria-required' );
+		if ( ( $required !== null ) || ( $ariarequired !== null ) ) {
+			$config['required'] = true;
 		}
 		return parent::getConfig( $config );
 	}
