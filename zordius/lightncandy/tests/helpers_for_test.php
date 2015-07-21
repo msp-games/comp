@@ -1,12 +1,5 @@
 <?php
 
-// Class for customized LCRun
-class MyLCRunClass extends LCRun3 {
-    public static function raw($cx, $v) {
-        return '[[DEBUG:raw()=>' . var_export($v, true) . ']]';
-    }
-}
-
 // Classes for inputs or helpers
 class myClass {
     function test() {
@@ -14,7 +7,7 @@ class myClass {
     }
 
     function helper2($arg) {
-        return is_array($arg) ? '=Array=' : "=$arg=";
+        return "=$arg=";
     }
 
     function __call($method, $args) {
@@ -70,12 +63,9 @@ class twoDimensionIterator implements Iterator {
 
 // Custom helpers
 function helper1($arg) {
-    $arg = is_array($arg) ? 'Array' : $arg;
     return "-$arg-";
 }                                                                                                                                          
 function alink($u, $t) {
-    $u = is_array($u) ? 'Array' : $u;
-    $t = is_array($t) ? 'Array' : $t;
     return "<a href=\"$u\">$t</a>";
 }
 
