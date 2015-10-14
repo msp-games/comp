@@ -1,6 +1,78 @@
 # OOjs UI Release History
 
-## v0.12.8-atease / 2015-09-18
+## v0.12.12 / 2015-10-13
+### Features
+* CapsuleMultiSelectWidget: When 'allowArbitrary' is true, don't require 'Enter' to confirm (Bartosz Dziewoński)
+* SelectFileWidget: Add a focus method (Ed Sanders)
+
+### Styles
+* CapsuleMultiSelectWidget: Set 'background-color' rather than 'background' (Bartosz Dziewoński)
+* DropdownWidget: Fix vertical alignment of handle's text (Volker E)
+* MediaWiki theme: Get transitions on ButtonWidget's `:hover` states in sync (Volker E)
+* MediaWiki theme: Unbreak checkbox/radio 'cursor: pointer' (Bartosz Dziewoński)
+* MediaWiki theme: Use inverted icon for 'active' buttons (Ed Sanders)
+
+### Code
+* ButtonElement: Actually use 'active' property and add getter (Ed Sanders)
+* Element: Document $element config option (Thalia)
+* composer.json: Add author names & e-mails (Alangi Derick)
+* demo: Correct some typos (Bartosz Dziewoński)
+
+## v0.12.11 / 2015-10-06
+### Styles
+* MediaWiki theme: Make shadows translucent black instead of light grey (Ed Sanders)
+* MediaWiki theme: Make PHP DropdownInputWidget look closer to JS version (Bartosz Dziewoński)
+
+### Code
+* Follow-up I4acbe69420: BookletLayout: Fix focus of page switching (Ed Sanders)
+* IndexLayout: Fix focus of panel switching (Ed Sanders)
+* TextInputWidget: Remove 'autocomplete' attribute on page navigation (Bartosz Dziewoński)
+* build: Bump es5-shim and various devDependencies to master (James D. Forrester)
+
+## v0.12.10 / 2015-09-29
+### Styles
+* Fix icon/indicator padding on TextInputWidget/SelectFileWidget (Ed Sanders)
+
+### Code
+* CapsuleItemWidget: Remove 'click' event preventing (Bartosz Dziewoński)
+* FloatableElement: Don't try unbinding events before we bind them (Bartosz Dziewoński)
+* SelectWidget: Ensure 'choose' never emits null (Ed Sanders)
+* Remove old textInputWidget-decorated classes (Ed Sanders)
+* build: Upgrade MediaWiki-Codesniffer to 0.4.0 (Kunal Mehta)
+
+## v0.12.9 / 2015-09-22
+### Features
+* BookletLayout, IndexLayout: Make autoFocus and focussing more reliable (Bartosz Dziewoński)
+* CapsuleMultiSelectWidget: Allow using CapsuleItemWidget subclasses (Bartosz Dziewoński)
+* CardLayout: Add a 'label' config option (Ed Sanders)
+* FloatableElement: Introduce mixin (Bartosz Dziewoński)
+* FloatingMenuSelectWidget: Update position of menus within overlay while scrolling (Bartosz Dziewoński)
+* IndexLayout: Add 'expanded' option, passed through to StackLayout (Ed Sanders)
+* MenuLayout: Use child selectors to allow nesting menus (Ed Sanders)
+* Re-attempt I31ab2bace4: Try to stop user from tabbing outside of open dialog box (Ed Sanders)
+
+### Styles
+* SelectFileWidget: Move file type over to the right in secondary text colour (Ed Sanders)
+* Fix focus styles on disabled widgets (Volker E)
+* Apex, MediaWiki themes: Make most borders on table icon thinner (Ed Sanders)
+* Apex, MediaWiki themes: Make picture icon border thinner (Ed Sanders)
+* MediaWiki theme: Alter buttons' padding and position icons absolutely (nirzar)
+* MediaWiki theme: Fix height of IndexLayout tab widget (Ed Sanders)
+* MediaWiki theme: Unify box-shadows for PopupWidget and DropdownWidget (Volker E)
+
+### Code
+* #isFocusableElement: Rewrite for performance and correctness (Ed Sanders)
+* BookletLayout: Remove unnecessary JSHint override (Bartosz Dziewoński)
+* DropdownWidget: Update example doc to show #getMenu usage (Ed Sanders)
+* Follow-up bf1497be: Fix PopupToolGroup use of renamed Clippable property (Ed Sanders)
+* PopupWidget: Add missing `@mixins` doc entry (Bartosz Dziewoński)
+* SelectFileWidget: Fix DOM order of file type label (Ed Sanders)
+* Widget: Fix docs for disable event (Ed Sanders)
+* docs: Remove excess empty lines in comments (Bartosz Dziewoński)
+* docs: Add quotes around PROJECT_BRIEF setting (Timo Tijhof)
+* Update version requirement for mediawiki/at-ease: 1.0.0 → 1.1.0 (Ori Livneh)
+
+## v0.12.8.1 / 2015-09-18 special release
 ### Code
 * build: Update version requirement for mediawiki/at-ease: 1.0.0 → 1.1.0 (Ori Livneh)
 
