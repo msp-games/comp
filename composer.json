@@ -1,0 +1,13 @@
+{
+	"config": {
+		"autoloader-suffix": "_mediawiki_vendor",
+		"classmap-authoritative": true,
+		"optimize-autoloader": true,
+		"preferred-install": "dist",
+		"vendor-dir": "."
+	},
+	"prefer-stable": true,
+	"require": {
+		"php": ">=5.3.3"
+	}
+}

@@ -1,6 +1,6 @@
 [gerrit]
 host=gerrit.wikimedia.org
 port=29418
-project=mediawiki/core/vendor.git
-defaultbranch=master
+project=mediawiki/vendor.git
+defaultbranch=REL1_23
 defaultrebase=0
